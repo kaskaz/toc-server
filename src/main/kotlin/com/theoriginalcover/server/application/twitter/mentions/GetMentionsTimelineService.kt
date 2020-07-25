@@ -7,8 +7,8 @@ import javax.inject.Singleton
 
 @Singleton
 class GetMentionsTimelineService(
-    private val storeMostRecentMentionService: StoreMostRecentMentionService,
-    private val voteCounterService: VoteCounterService
+    storeMostRecentMentionService: StoreMostRecentMentionService,
+    voteCounterService: VoteCounterService
 ) {
 
     private val processor: AbstractChainedStatusesProcessor
