@@ -6,7 +6,7 @@ import com.theoriginalcover.server.domain.Mention
 class StoreMostRecentMentionService(private val configurationRepository: IConfigurationRepository) {
 
     companion object {
-        const val LAST_PROCESSED_MENTION: String = "last_processed_mention"
+        const val LAST_PROCESSED_MENTION: String = "mentions:last_processed_mention"
     }
 
     fun store(mentions: List<Mention>?) {
@@ -14,9 +14,9 @@ class StoreMostRecentMentionService(private val configurationRepository: IConfig
 
         val maxId = mentions.map { it.id!! }.max() ?: return
 
-        val lastProcessedMention = configurationRepository.getByKey(LAST_PROCESSED_MENTION)
+        val lastProcessedMention = configurationRepository.get(LAST_PROCESSED_MENTION)
 
-        if (lastProcessedMention == null || maxId > lastProcessedMention.toLong())
+        if (lastProcessedMention.isBlank() || maxId > lastProcessedMention.toLong())
             configurationRepository.save(LAST_PROCESSED_MENTION, maxId.toString())
     }
 }

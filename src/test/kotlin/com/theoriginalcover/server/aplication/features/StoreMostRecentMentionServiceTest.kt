@@ -48,7 +48,7 @@ class StoreMostRecentMentionServiceTest {
     fun shouldStoreTheMostRecentMentionWithoutPreviousConfigurationValue() {
         val mentions = getListOfMentions(2, 3)
         val mostRecentId = "3"
-        val previousConfigValue = null
+        val previousConfigValue = ""
 
         verifyAndSave(mentions, previousConfigValue, mostRecentId)
     }
@@ -62,29 +62,29 @@ class StoreMostRecentMentionServiceTest {
         )
     }
 
-    private fun verifyAndSave(mentions: List<Mention>?, previousConfigValue: String?, mostRecentId: String) {
+    private fun verifyAndSave(mentions: List<Mention>?, previousConfigValue: String, mostRecentId: String) {
 
-        every { configurationRepository.getByKey(configKey) } returns previousConfigValue
+        every { configurationRepository.get(configKey) } returns previousConfigValue
         justRun { configurationRepository.save(configKey, mostRecentId) }
 
         utStoreMostRecentMentionService.store(mentions)
 
         verifyOrder {
-            configurationRepository.getByKey(configKey)
+            configurationRepository.get(configKey)
             configurationRepository.save(configKey, mostRecentId)
         }
 
         confirmVerified(configurationRepository)
     }
 
-    private fun verifyAndDoNotSave(mentions: List<Mention>?, previousConfigValue: String?) {
+    private fun verifyAndDoNotSave(mentions: List<Mention>?, previousConfigValue: String) {
 
-        every { configurationRepository.getByKey(configKey) } returns previousConfigValue
+        every { configurationRepository.get(configKey) } returns previousConfigValue
 
         utStoreMostRecentMentionService.store(mentions)
 
         verifyOrder {
-            configurationRepository.getByKey(configKey)
+            configurationRepository.get(configKey)
         }
 
         confirmVerified(configurationRepository)
