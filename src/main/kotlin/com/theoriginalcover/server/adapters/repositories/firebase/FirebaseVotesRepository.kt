@@ -53,6 +53,7 @@ class FirebaseVotesRepository : FirebaseRepository(), IVoteRepository {
         if (data == null) data = arrayListOf(map) else (data as ArrayList<Map<String, String>>).add(map)
 
         poll.update(mapOf(Pair(vote.type.label(), data)), Precondition.NONE)
+            .get()
     }
 
     private fun mapVoteToList(votes: ArrayList<HashMap<String, String>>, pollId: String, type: VoteType, list: ArrayList<Vote>) {
