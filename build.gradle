@@ -61,6 +61,8 @@ dependencies {
     implementation("com.google.firebase:firebase-admin:6.11.0")
 }
 
+task stage(dependsOn: ['build', 'clean'])
+
 test.classpath += configurations.developmentOnly
 
 mainClassName = "com.theoriginalcover.server.ApplicationKt"
