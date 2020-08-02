@@ -66,7 +66,7 @@ class VoteCounterService(
             pollId = mention.inReplyToStatusId.toString(),
             userId = mention.user?.id.toString(),
             text = mention.text!!,
-            isOriginalNotCover = result.isOriginal())
+            type = result.type()!!)
 
         voteRepository.save(vote)
         voteConfirmer.confirm(vote, mention)

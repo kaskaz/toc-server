@@ -5,5 +5,5 @@ data class Vote(
     val pollId: String,
     val userId: String,
     val text: String,
-    var isOriginalNotCover: Boolean
+    var type: VoteType
 )

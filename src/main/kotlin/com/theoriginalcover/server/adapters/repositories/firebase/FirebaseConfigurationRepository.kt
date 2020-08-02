@@ -1,10 +1,11 @@
-package com.theoriginalcover.server.adapters.repositories
+package com.theoriginalcover.server.adapters.repositories.firebase
 
+import com.theoriginalcover.server.adapters.repositories.IConfigurationRepository
 import java.util.*
 import javax.inject.Singleton
 
 @Singleton
-class ConfigurationRepositoryImpl : FirebaseRepository(), IConfigurationRepository {
+class FirebaseConfigurationRepository : FirebaseRepository(), IConfigurationRepository {
 
     companion object {
         private const val COLLECTION = "configuration"

@@ -1,4 +1,4 @@
-package com.theoriginalcover.server.adapters.repositories
+package com.theoriginalcover.server.adapters.repositories.firebase
 
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.firestore.Firestore
@@ -18,7 +18,7 @@ open class FirebaseRepository {
         }
     }
 
-    fun getDatabase(): Firestore {
+    protected fun getDatabase(): Firestore {
         return FirestoreClient.getFirestore()
     }
 }

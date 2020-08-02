@@ -5,6 +5,7 @@ import com.theoriginalcover.server.application.features.votes.*
 import com.theoriginalcover.server.domain.Mention
 import com.theoriginalcover.server.domain.User
 import com.theoriginalcover.server.domain.Vote
+import com.theoriginalcover.server.domain.VoteType
 import io.mockk.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -34,7 +35,7 @@ class VoteCounterServiceTest {
                 pollId = existingPollStr,
                 userId = UUID.randomUUID().toString(),
                 text = UUID.randomUUID().toString(),
-                isOriginalNotCover = false))
+                type = VoteType.COVER))
 
         utVoteCounterService.count(
             listOf(Mention(
@@ -73,7 +74,7 @@ class VoteCounterServiceTest {
                 pollId = existingPollStr,
                 userId = existingUserStr,
                 text = UUID.randomUUID().toString(),
-                isOriginalNotCover = false))
+                type = VoteType.COVER))
 
         utVoteCounterService.count(
             listOf(Mention(
@@ -119,7 +120,7 @@ class VoteCounterServiceTest {
             pollId = existingPollStr,
             userId = (existingUser + 1).toString(),
             text = voteText,
-            isOriginalNotCover = false)
+            type = VoteType.COVER)
 
         val mention = Mention(
             id = mentionId,
@@ -172,7 +173,7 @@ class VoteCounterServiceTest {
             pollId = existingPollStr,
             userId = newUser.toString(),
             text = voteText,
-            isOriginalNotCover = true)
+            type = VoteType.ORIGINAL)
 
         val mention = Mention(
             id = mentionId,
