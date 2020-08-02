@@ -62,6 +62,7 @@ dependencies {
 }
 
 task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
 
 test.classpath += configurations.developmentOnly
 
