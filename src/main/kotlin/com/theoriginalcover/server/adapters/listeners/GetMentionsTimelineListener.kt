@@ -1,5 +1,6 @@
 package com.theoriginalcover.server.adapters.listeners
 
+import com.theoriginalcover.server.application.features.MostRecentMentionService
 import com.theoriginalcover.server.application.twitter.mentions.GetMentionsTimelineService
 import com.theoriginalcover.server.domain.IMentionsMapper
 import io.micronaut.context.annotation.Context
@@ -8,7 +9,8 @@ import org.slf4j.LoggerFactory
 import twitter4j.*
 
 @Context
-class GetMentionsTimelineListener constructor(
+class GetMentionsTimelineListener(
+    private val mostRecentMentionService: MostRecentMentionService,
     private val getMentionsTimelineService: GetMentionsTimelineService,
     private val mentionsMapper: IMentionsMapper<ResponseList<Status>>
 ) : TwitterAdapter() {
@@ -23,17 +25,17 @@ class GetMentionsTimelineListener constructor(
             .addListener(this)
     }
 
-    @Scheduled(fixedRate = "5s")
+    @Scheduled(fixedRate = "\${tocserver.adapters.listeners.get-mentions-timeline.fixed-rate:15s}")
     fun callGetMentions() {
-        AsyncTwitterFactory
-            .getSingleton()
-            .getMentions()
+        val mention: Long? = mostRecentMentionService.get()
+        val factory = AsyncTwitterFactory.getSingleton()
+        if (mention == null) factory.getMentions() else factory.getMentions(Paging(mention))
     }
 
     override fun gotMentions(statuses: ResponseList<Status>?) {
         logger.info("returned ${statuses?.size} status")
-        getMentionsTimelineService.process(
-            mentionsMapper.map(statuses))
+//        getMentionsTimelineService.process(
+//            mentionsMapper.map(statuses))
     }
 
     override fun onException(te: TwitterException?, method: TwitterMethod?) {

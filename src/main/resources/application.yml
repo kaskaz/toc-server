@@ -1,3 +1,9 @@
 micronaut:
   application:
     name: tocserver
+
+tocserver:
+  adapters:
+    listeners:
+      get-mentions-timeline:
+        fixed-rate: 15s

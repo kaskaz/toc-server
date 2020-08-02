@@ -3,7 +3,9 @@ package com.theoriginalcover.server.adapters.rest
 import org.slf4j.LoggerFactory
 import twitter4j.TwitterException
 import twitter4j.TwitterFactory
+import javax.inject.Singleton
 
+@Singleton
 class Favorites {
 
     companion object {

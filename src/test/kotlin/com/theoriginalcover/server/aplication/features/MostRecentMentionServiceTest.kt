@@ -1,19 +1,20 @@
 package com.theoriginalcover.server.aplication.features
 
 import com.theoriginalcover.server.adapters.repositories.IConfigurationRepository
-import com.theoriginalcover.server.application.features.StoreMostRecentMentionService
+import com.theoriginalcover.server.application.features.MostRecentMentionService
+import com.theoriginalcover.server.domain.ConfigurationKeys
 import com.theoriginalcover.server.domain.Mention
 import com.theoriginalcover.server.domain.MentionMotherBuilder
 import io.mockk.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-class StoreMostRecentMentionServiceTest {
+class MostRecentMentionServiceTest {
 
     private val configurationRepository = mockk<IConfigurationRepository>()
-    private val utStoreMostRecentMentionService = StoreMostRecentMentionService(configurationRepository)
+    private val utStoreMostRecentMentionService = MostRecentMentionService(configurationRepository)
 
-    private val configKey = StoreMostRecentMentionService.LAST_PROCESSED_MENTION
+    private val configKey = ConfigurationKeys.LAST_PROCESSED_MENTION
 
     @Test
     @DisplayName("should not store the most recent mention when less than previous configured value")

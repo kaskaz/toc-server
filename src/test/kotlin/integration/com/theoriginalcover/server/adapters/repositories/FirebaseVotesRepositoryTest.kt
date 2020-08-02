@@ -11,8 +11,8 @@ import java.util.*
 class FirebaseVotesRepositoryTest {
 
     companion object {
-        val POLL_IDS = setOf<String>("1276940872068861952", "1285008608770633730")
         val POLL_ID = "integration-test-poll"
+        val POLL_IDS = setOf<String>(POLL_ID, POLL_ID.plus("-additional"))
         val VOTES = listOf<Vote>(
             Vote("original-1", POLL_ID, "user-1", "text-1", VoteType.ORIGINAL),
             Vote("original-2", POLL_ID, "user-2", "text-2", VoteType.ORIGINAL),

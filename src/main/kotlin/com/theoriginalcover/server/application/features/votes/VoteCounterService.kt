@@ -3,7 +3,9 @@ package com.theoriginalcover.server.application.features.votes
 import com.theoriginalcover.server.adapters.repositories.IVoteRepository
 import com.theoriginalcover.server.domain.Mention
 import com.theoriginalcover.server.domain.Vote
+import javax.inject.Singleton
 
+@Singleton
 class VoteCounterService(
     private val voteRepository: IVoteRepository,
     private val voteDetector: IVoteDetector,
