@@ -34,8 +34,8 @@ class GetMentionsTimelineListener(
 
     override fun gotMentions(statuses: ResponseList<Status>?) {
         logger.info("returned ${statuses?.size} status")
-//        getMentionsTimelineService.process(
-//            mentionsMapper.map(statuses))
+        getMentionsTimelineService.process(
+            mentionsMapper.map(statuses))
     }
 
     override fun onException(te: TwitterException?, method: TwitterMethod?) {
