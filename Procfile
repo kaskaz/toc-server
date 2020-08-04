@@ -1,1 +1,1 @@
-web: java -jar tocserver.jar
+web: java -jar build/libs/tocserver-0.1.jar
