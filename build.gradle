@@ -106,11 +106,11 @@ shadowJar {
     mergeServiceFiles()
 }
 
-jar {
+/*jar {
     manifest {
         attributes 'Main-Class': 'com.theoriginalcover.server.ApplicationKt'
     }
-}
+}*/
 
 tasks.withType(JavaExec) {
     classpath += configurations.developmentOnly
