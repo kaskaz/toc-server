@@ -12,9 +12,11 @@ import javax.inject.Singleton
 class GetMentionsMapper : IMentionsMapper<ResponseList<Status>> {
 
     private var mapper: Mapper = DozerBeanMapperBuilder.buildDefault()
-    private var clazz: Class<List<Mention>> = listOf<Mention>().javaClass
+    private var clazz: Class<Mention> = Mention::class.java
 
     override fun map(list: ResponseList<Status>?): List<Mention> {
-        return mapper.map(list, clazz)
+        val output = ArrayList<Mention>()
+        list?.forEach { status -> output.add(mapper.map(status, clazz)) }
+        return output
     }
 }

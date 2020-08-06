@@ -10,4 +10,6 @@ data class Mention(
     var inReplyToUserId: Long?,
     var place: Place?,
     var user: User?
-)
+) {
+    constructor() : this(null, null, null, null, null, null, null)
+}
