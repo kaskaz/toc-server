@@ -33,7 +33,7 @@ class GetMentionsTimelineListener(
     }
 
     override fun gotMentions(statuses: ResponseList<Status>?) {
-        logger.info("returned ${statuses?.size} status")
+        logger.info("returned status: ${statuses?.size}")
         getMentionsTimelineService.process(
             mentionsMapper.map(statuses))
     }

@@ -1,8 +1,10 @@
 package com.theoriginalcover.server.application.features.votes
 
+import com.theoriginalcover.server.adapters.listeners.GetMentionsTimelineListener
 import com.theoriginalcover.server.adapters.repositories.IVoteRepository
 import com.theoriginalcover.server.domain.Mention
 import com.theoriginalcover.server.domain.Vote
+import org.slf4j.LoggerFactory
 import javax.inject.Singleton
 
 @Singleton
@@ -11,6 +13,10 @@ class VoteCounterService(
     private val voteDetector: IVoteDetector,
     private val voteConfirmer: IVoteConfirmer
 ) {
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(VoteCounterService::class.java)
+    }
 
     fun count(mentions: List<Mention>?) {
         if (mentions == null)
@@ -71,6 +77,8 @@ class VoteCounterService(
             type = result.type()!!)
 
         voteRepository.save(vote)
+        logger.info("vote saved: $vote")
+
         voteConfirmer.confirm(vote, mention)
     }
 }
