@@ -1,1 +1,1 @@
-web: java -jar build/libs/tocserver-0.1.jar
+worker: java -jar build/libs/tocserver-0.1.jar
