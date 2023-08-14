@@ -3,6 +3,7 @@ FROM gradle:7.1.0-jdk11
 COPY . .
 RUN ./gradlew formatKotlin
 RUN ./gradlew build -x :test
+RUN dir
 
 # Package stage
 FROM openjdk:14-alpine
